@@ -3,15 +3,15 @@ using UnityEngine;
 public class ShapeGenerator : MonoBehaviour
 {
     ShapeSettings _settings;
-    NoiseFilter[] _noiseFilters;
+    INoiseFilter[] _noiseFilters;
 
     public ShapeGenerator(ShapeSettings settings)
     {
         _settings = settings;
-        _noiseFilters = new NoiseFilter[settings.noiseLayers.Length];
+        _noiseFilters = new INoiseFilter[settings.noiseLayers.Length];
         for (int i = 0; i < _noiseFilters.Length; i++)
         {
-            _noiseFilters[i] = new NoiseFilter(settings.noiseLayers[i].noiseSettings);
+            _noiseFilters[i] = NoiseFilterFactory.CreateNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
     }
 
